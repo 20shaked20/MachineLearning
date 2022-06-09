@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-data = pd.read_csv('/Users/Shaked/PycharmProjects/LinearRegression/prices.csv'
+data = pd.read_csv('../../PycharmProjects/LinearRegression/prices.csv'
                    , ',',
                    usecols=['LocalPrice', 'Bathrooms', 'SiteSize', 'LivingSize', 'Garages', 'Rooms', 'Bedrooms', 'Age',
                             'CtorType', 'AdrType', 'Firefighter'])
@@ -74,15 +74,15 @@ for iteration in range(10000):
         w[i] -= alpha * deriv_w(which_w=i, w_method=w, data_x_method=data_x_model, data_y_method=data_y_model,
                                 b_method=b)
     if iteration % 200 == 0:
-        # TODO: print entire w's
-        print("it: %d, w0: %.3f, w1: %.3f, w2: %.3f, w3: %.3f, w4: %.3f, w5: %.3f, b: %.3f" % (
-            iteration, w[0], w[1], w[2], w[3], w[4], w[5], b))
+        print(
+            "it: %d, w0: %.3f, w1: %.3f, w2: %.3f, w3: %.3f, w4: %.3f, w5: %.3f, w6: %.3f, w7: %.3f"
+            ",w8: %.3f, w9: %.3f, w10: %.3f, b: %.3f"
+            % (iteration, w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9], w[10], b))
 
-# TODO: TO MODEL 75% and TEST 25%
 # Testing the rows 22-28 ( as part of the 25% left after modeling )
-arr_test = np.array([w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9], w[10]])  # create the test array vector using the results.
+arr_test = np.array([w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9]])  # create the test array vector using the results.
 for iter in range(0, 6):
-    print(f'Estimated price for House.no{iter} :', )
-
-print("Estimated price for Galaxy S5: ", np.dot(np.array([5, 25]), np.array([w[0], w[1]])) + b)
-print("Estimated price for Galaxy S1: ", np.dot(np.array([1, 1]), np.array([w[0], w[1]])) + b)
+    curr_house_data = [data_x_test[0][iter], data_x_test[1][iter], data_x_test[2][iter], data_x_test[3][iter],
+                       data_x_test[4][iter], data_x_test[5][iter], data_x_test[6][iter], data_x_test[7][iter],
+                       data_x_test[8][iter], data_x_test[9][iter]]
+    print(f'Estimated price for House.no{iter+22} :', np.dot(curr_house_data, arr_test) + b)
